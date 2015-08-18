@@ -2,7 +2,8 @@
 var SERVER_PORT = 4567,
 	SERVER_HOST = 'localhost';
 
-var Hapi = require('hapi');
+var Hapi = require('hapi'),
+	Article = require('./article');
 
 //Create server object
 var server = new Hapi.Server();
@@ -13,6 +14,10 @@ server.connection({
 	port : SERVER_PORT,
 	host : SERVER_HOST
 });
+
+var article1 = new Article('First Article', 'This is my first article object');
+
+article1.getTitle();
 
 
 //Handle routes here
