@@ -1,0 +1,22 @@
+{
+  "name": "blog-warmup",
+  "version": "1.0.0",
+  "description": "A Blog, nothing more.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sezalcru/blog-warmup.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sezalcru/blog-warmup/issues"
+  },
+  "homepage": "https://github.com/sezalcru/blog-warmup#readme",
+  "dependencies": {
+    "hapi": "^9.0.2"
+  }
+}
