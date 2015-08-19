@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/sezalcru/blog-warmup#readme",
   "dependencies": {
-    "hapi": "^9.0.2"
+    "hapi": "^9.0.2",
+    "mongodb": "^2.0.42"
   }
 }

@@ -15,11 +15,6 @@ server.connection({
 	host : SERVER_HOST
 });
 
-var article1 = new Article('First Article', 'This is my first article object');
-
-article1.getTitle();
-
-
 //Handle routes here
 server.route({
 	method : 'GET', 
