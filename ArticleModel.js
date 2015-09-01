@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 //Connect to local database instance
-mongoose.coonect("mongodb://localhost:27017/test");
+mongoose.connect("mongodb://localhost:27017/test");
 
 //Get a connection
 var db = mongoose.connection;
@@ -28,4 +28,4 @@ db.once("open", function(){
 });
 
 
-module.exports = db;
+module.exports = db.Article;

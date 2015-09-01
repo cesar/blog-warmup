@@ -3,7 +3,7 @@ var SERVER_PORT = 4567,
 	SERVER_HOST = 'localhost';
 
 var Hapi = require('hapi'),
-	Article = require('./article');
+	ArticleController = require('./ArticleController');
 
 //Create server object
 var server = new Hapi.Server();
@@ -16,26 +16,8 @@ server.connection({
 });
 
 
-var mongo = require('mongodb').MongoClient;
-
-var url = 'mongodb://localhost:27017/test';
-
-var db = mongo.connect(url, function(err, db){
-		if(err) {
-			throw new Error('Database connection failed');
-		}
-		console.log('Connected to database instance');
-		return db
-});
-
 //Handle routes here
-server.route({
-	method : 'GET', 
-	path : '/',
-	handler : function(req, res){
-		res('Hello World');
-	}
-})
+server.route(ArticleController.index);
 
 
 //Start the server
