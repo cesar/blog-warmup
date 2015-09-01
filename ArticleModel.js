@@ -1,67 +1,31 @@
-//Article class to store all the properties of an article
-var Article = function(title, content){
-	//An article must have a title and content
-	if (!title || title === "") {
-		throw new Error('Article must have a valid title attribute');
-	}
+var mongoose = require("mongoose");
 
-	if (!content || content === "") {
-		throw new Error('Article must have a valid content attribuet');
-	}
+//Connect to local database instance
+mongoose.coonect("mongodb://localhost:27017/test");
 
-	this.title = title;
+//Get a connection
+var db = mongoose.connection;
 
-	this.content = content;
-}
 
-var mongo = require('mongodb').MongoClient;
-
-var url = 'mongodb://localhost:27017/test';
-
-mongo.connect(url, function(err, db){
-		if(err) {
-			throw new Error('Database connection failed');
-		}
-		console.log('Connected to database instance');
-		db.close();
+//Check for errors
+db.on('error', function(error){
+	console.log(error)
 });
 
-Article.prototype.getTitle = function(){
-	return this.title;
-}
+db.once("open", function(){
 
-Article.prototype.setTitle = function(title){
-	this.title = title;
-}
+	//Database connection sucess
 
-Article.prototype.getContent = function(){
-	return this.content;
-}
+	//Define schema
+	var articleSchema = mongoose.Schema({
+		title : String,
+		content : String
+	});
 
-Article.prototype.setContent = function(content){
-	this.content = content;
-}
+	//Compile into model
+	var Article = mongoose.model("Article", articleSchema);
 
-//CRUD Operations
+});
 
-//GET
-Article.prototype.find = function(id){
-	
-}
 
-//INSERT
-Article.prototype.save = function(){
-		
-}
-
-//PUT
-Article.prototype.update = function(title, content){
-
-}
-
-//DELETE
-Article.prototype.delete = function(id){
-
-}
-
-module.exports = Article;
+module.exports = db;

@@ -15,6 +15,19 @@ server.connection({
 	host : SERVER_HOST
 });
 
+
+var mongo = require('mongodb').MongoClient;
+
+var url = 'mongodb://localhost:27017/test';
+
+var db = mongo.connect(url, function(err, db){
+		if(err) {
+			throw new Error('Database connection failed');
+		}
+		console.log('Connected to database instance');
+		return db
+});
+
 //Handle routes here
 server.route({
 	method : 'GET', 
