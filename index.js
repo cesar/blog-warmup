@@ -15,6 +15,19 @@ server.connection({
 	host : SERVER_HOST
 });
 
+//Set up the templating engine
+server.register(require('vision'), function(err) {
+		server.views({
+		engines : {
+			html : require('handlebars')
+		},
+		relativeTo : __dirname,
+		path : 'templates'
+	});
+});
+
+
+
 
 //Handle routes here
 server.route(ArticleController.index);

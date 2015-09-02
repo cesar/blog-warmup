@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/sezalcru/blog-warmup#readme",
   "dependencies": {
+    "handlebars": "^4.0.0",
     "hapi": "^9.0.2",
     "mongodb": "^2.0.42",
-    "mongoose": "^4.1.4"
+    "mongoose": "^4.1.4",
+    "vision": "^3.0.0"
   }
 }
