@@ -27,11 +27,10 @@ server.register(require('vision'), function(err) {
 });
 
 
-
-
 //Handle routes here
-server.route(ArticleController.index);
-
+Object.keys(ArticleController).forEach(function(routeHandler){
+	server.route(ArticleController[routeHandler]);
+});
 
 //Start the server
 server.start(function() {
