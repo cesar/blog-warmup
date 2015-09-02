@@ -22,10 +22,19 @@ var ArticleController = {
 		path : '/articles',
 		handler : function(request, response) {
 
-			response.view('index', {
-				title : "Epic Blog is Epic",
-				articles : articles
+			//Get all the articles
+			Article.find(function(err, articles){
+				if (err) {
+					console.log('Oh no, I broke');
+				}
+
+				response.view('index', {
+					title : 'Epic Blog is Epic',
+					articles : articles
+				});
 			});
+
+			
 		}
 	},
 	//Render a single article
@@ -33,6 +42,8 @@ var ArticleController = {
 		method : "GET",
 		path : '/articles/{id}',
 		handler : function(request, response) {
+
+
 			response.view('show', {
 				title : articles[request.params.id].title,
 				body : articles[request.params.id].content
@@ -51,25 +62,54 @@ var ArticleController = {
 		method : "POST",
 		path : "/articles",
 		handler : function(request, response) {
-			console.log(request.payload);
-			response.redirect('/articles');
+			
+			//Create an instance of the Article model
+			var article = new Article(request.payload);
+
+			//Store in database
+			article.save(function(err){
+				if (err) {
+					console.log('Oh no, something went wrong!');
+				}
+
+				response.redirect('/articles');
+			});
 		}
 	},
 	updateArticle : {
 		method : "GET",
 		path : "/edit_article/{id}",
 		handler : function(request, response) {
-			response.view('edit', {
-				title : articles[request.params.id].title,
-				body : articles[request.params.id].content
+
+			Article.find({ _id : request.params.id }, function(err, articles){
+				if (err) {
+					console.log('Oh no, this is broken');
+				}
+
+				if(articles.length > 0){
+					response.view('edit', {
+						title : articles[0].title,
+						body : articles[0].content
+					});	
+				} else {
+					console.log('Article with the given index was not found');
+					response.redirect('/articles');
+				}
 			});
-		}
+		}	
 	},
 	editArticle : {
 		method : "PUT",
 		path : "/article/{id}",
 		handler : function(request, response) {
-			
+
+			Article.update({_id : request.params.id}, {$set : request.payload}, function(err, article) {
+				if (err) {
+					console.log('Oh no, Im broken');
+				}
+
+				response.redirect('/articles');
+			});
 		}
 	},
 	deleteArticle : {
@@ -77,6 +117,13 @@ var ArticleController = {
 		path : '/article/{id}',
 		handler : function(request, response) {
 			
+			Article.remove({_id : request.params.id}, function(err, article){
+				if (err) {
+					console.log('Oh no, Im broken');
+				}
+
+				response.redirect('/arcticles');
+			});
 		}
 	}
 }
