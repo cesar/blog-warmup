@@ -1,20 +1,5 @@
 var Article = require('./ArticleModel');
 
-var articles = [
-	{
-		title : "Apolonia",
-		content : "Apolonia appears in the first Godfather movie, Michael falls in love with her"
-	},
-	{
-		title : "Imigration",
-		content : "Imigration is a very hot topic right now"
-	},
-	{
-		title : "Vacation",
-		content : "Vacation is so far away it feels like an eternity away"
-	}
-];
-
 var ArticleController = {
 	//Get all the articles in the database and render them
 	index : {
@@ -30,6 +15,7 @@ var ArticleController = {
 
 				response.view('index', {
 					title : 'Epic Blog is Epic',
+					pageTitle : 'Articles',
 					articles : articles
 				});
 			});
@@ -43,10 +29,13 @@ var ArticleController = {
 		path : '/articles/{id}',
 		handler : function(request, response) {
 
+			Article.find({ _id : request.params.id }, function(err, articles){
 
-			response.view('show', {
-				title : articles[request.params.id].title,
-				body : articles[request.params.id].content
+				response.view('show', {
+					title : articles[0].title,
+					body : articles[0].content,
+					_id : articles[0]._id
+				});
 			});
 		}
 	},
@@ -89,7 +78,8 @@ var ArticleController = {
 				if(articles.length > 0){
 					response.view('edit', {
 						title : articles[0].title,
-						body : articles[0].content
+						body : articles[0].content,
+						_id : articles[0]._id
 					});	
 				} else {
 					console.log('Article with the given index was not found');
@@ -99,8 +89,8 @@ var ArticleController = {
 		}	
 	},
 	editArticle : {
-		method : "PUT",
-		path : "/article/{id}",
+		method : "POST",
+		path : "/articles/{id}",
 		handler : function(request, response) {
 
 			Article.update({_id : request.params.id}, {$set : request.payload}, function(err, article) {
@@ -113,8 +103,8 @@ var ArticleController = {
 		}
 	},
 	deleteArticle : {
-		method : "DELETE",
-		path : '/article/{id}',
+		method : "GET",
+		path : '/delete_article/{id}',
 		handler : function(request, response) {
 			
 			Article.remove({_id : request.params.id}, function(err, article){
@@ -122,7 +112,7 @@ var ArticleController = {
 					console.log('Oh no, Im broken');
 				}
 
-				response.redirect('/arcticles');
+				response.redirect('/articles');
 			});
 		}
 	}

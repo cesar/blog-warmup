@@ -4,13 +4,31 @@
 <head>
   <meta charset="utf-8">
   <title>Epic Blog is Epic</title>
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
 </head>
 <body>
-	<div class="container">
-  		<h1>{{title}}</h1>
-  		<div class="body">
-    		<p>{{body}}</p>
-  		</div>
-	</div>
+	<div class="pure-g">
+    <div class="pure-u-1-4">
+      <div class="pure-menu" style="padding-top : 5%;">
+        <span class="pure-menu-heading">Epic Blog is Epic</span>
+        <ul class="pure-menu-list">
+              <li class="pure-menu-item"><a href="/articles" class="pure-menu-link">Articles</a></li>
+              <li class="pure-menu-item"><a href="/new_article" class="pure-menu-link">New Article</a></li>           
+          </ul>
+      </div>
+    </div>
+    <div class="pure-u-3-4">
+      <div class="pure-g">
+        <div class="pure-u-3-4">
+          <h1>{{title}}</h1>
+          <p>{{body}}</p>
+        </div>
+        <div class="pure-u-1-4" style="padding-top: 2%;">
+          <a href="/edit_article/{{_id}}" class="pure-button">Edit</a>
+          <a href="/delete_article/{{_id}}" class="pure-button">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
