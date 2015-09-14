@@ -1,6 +1,14 @@
 var Article = require('./ArticleModel');
 
-var ArticleController = {
+var ArticleController = [
+
+	reroute : {
+		method : "GET",
+		path : '/',
+		handler : function(request, response) {
+			response.redirect('/');
+		}
+	},
 	//Get all the articles in the database and render them
 	index : {
 		method : "GET",
@@ -116,6 +124,6 @@ var ArticleController = {
 			});
 		}
 	}
-}
+]
 
 module.exports = ArticleController;
