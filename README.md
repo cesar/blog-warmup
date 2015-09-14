@@ -13,6 +13,7 @@ In order to run this project you need to have [NodeJS](https://nodejs.org/en/) i
 * [mongoDB Driver](https://github.com/mongodb/node-mongodb-native)
 * [mongooseJS](http://mongoosejs.com/docs/index.html)
 * [Vision](https://github.com/hapijs/vision)
+* [PureCSS](http://purecss.io)
 
 Each of these modules have great documentation and installation guides.
 
